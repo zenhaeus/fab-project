@@ -8,20 +8,17 @@ namespace MyProject
         public static void Main()
         {
             
-            int N = 5;
-            int maxN = 100000;
+            int N = 4;
             string test = " ";
             string initial = " ";
-            string text = "mummy";
-            int i = 0;
+            string text = "nice";
             Key trial = new Key();
-            while (i < maxN && initial.ToLower() != text.Substring(0,N))
+            while (initial.ToLower() != text.Substring(0,N))
             {
                 trial = new Key();
                 var address = trial.PubKey.GetAddress(Network.TestNet);
                 test = address.ToString();
-                initial = test.Substring(0,N);
-                i++;
+                initial = test.Substring(34-N,N);
             }
             Console.WriteLine("Adress : " + test);
             Console.WriteLine("Sequence : " + initial);
