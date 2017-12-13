@@ -9,7 +9,7 @@ namespace MyProject
 {
     class NinjaInteractor
     {
-        public static void Main()
+        public NinjaInteractor()
         {
             /*
             1.Choose a transaction at random on https://blockchain.info
@@ -32,7 +32,7 @@ namespace MyProject
             PrintUTXO(client, wallet);
         }
 
-        private static void Transaction_info()
+        private void Transaction_info()
         {
             // Create a client in the main network
             QBitNinjaClient client = new QBitNinjaClient(Network.Main);
@@ -82,7 +82,7 @@ namespace MyProject
             Console.WriteLine("==============================");
         }
 
-        private static WalletClient CreateWallet(QBitNinjaClient client)
+        private WalletClient CreateWallet(QBitNinjaClient client)
         {
             // create the wallet
             var wallet = client.GetWalletClient("Copay");
@@ -94,7 +94,7 @@ namespace MyProject
 
             return wallet;
         }
-        private static void Copay_info(QBitNinjaClient client, WalletClient wallet)
+        private void Copay_info(QBitNinjaClient client, WalletClient wallet)
         {
             List<BalanceOperation> operations = wallet.GetBalance().Result.Operations;
         
@@ -120,7 +120,7 @@ namespace MyProject
 
         }
 
-        private static void PrintUTXO(QBitNinjaClient client, WalletClient wallet)
+        private void PrintUTXO(QBitNinjaClient client, WalletClient wallet)
         {
             // list of all unspend transaction
             List<BalanceOperation> unspend_operations = new List<BalanceOperation>();
