@@ -45,11 +45,24 @@ namespace ProgAssignment
             GetTransactionResponse transactionResponse = client.GetTransaction(transactionId).Result;
             Transaction transaction = transactionResponse.Transaction;
 
+
             // Download all information for this transaction
+            Decimal fees = transactionResponse.Fees.ToDecimal(MoneyUnit.BTC);
+            String blockID = transactionResponse.Block.BlockId.ToString();
+            List<ICoin> reveicedCoins = transactionResponse.ReceivedCoins;
+            List<ICoin> spentCoins = transactionResponse.SpentCoins;
+
+            Console.WriteLine("==============================");
             Console.Write("TRANSACTION ID : ");
             Console.WriteLine(transactionId);
 
-            Console.WriteLine("==============================");
+            Console.Write("BLOCK ID : ");
+            Console.WriteLine(blockID);
+
+            Console.Write("FEES : ");
+            Console.WriteLine(fees);
+            Console.WriteLine("");
+
             Console.WriteLine("Outputs");
             Console.WriteLine("------------------------------");
             var outputs = transaction.Outputs;
@@ -61,15 +74,13 @@ namespace ProgAssignment
                 Console.WriteLine(amount.ToDecimal(MoneyUnit.BTC));
                 var paymentScript = output.ScriptPubKey;
                 Console.Write("ScriptPubKey : ");
-                Console.WriteLine(paymentScript);  // It's the ScriptPubKey
+                Console.WriteLine(paymentScript);
                 var address = paymentScript.GetDestinationAddress(Network.Main);
                 Console.Write("Address : ");
                 Console.WriteLine(address);
-                Console.WriteLine("------------------------------");
             }
-            Console.WriteLine("==============================");
 
-            Console.WriteLine("==============================");
+            Console.WriteLine("");
             Console.WriteLine("Inputs");
             Console.WriteLine("------------------------------");
             var inputs = transaction.Inputs;
@@ -80,9 +91,9 @@ namespace ProgAssignment
                 Console.WriteLine(previousOutpoint.Hash); // hash of prev tx
                 Console.Write("idx of output from previous tx : ");
                 Console.WriteLine(previousOutpoint.N); // idx of out from prev tx, that has been spent in the current tx
-                Console.WriteLine("------------------------------");
             }
             Console.WriteLine("==============================");
+            Console.WriteLine();
         }
 
         private WalletClient CreateWallet(QBitNinjaClient client)
@@ -120,7 +131,7 @@ namespace ProgAssignment
             Console.Write("Total balance : ");
             Console.WriteLine(total_balance);
             Console.WriteLine("==============================");
-
+            Console.WriteLine("");
         }
 
         private void PrintUTXO(QBitNinjaClient client, WalletClient wallet)
