@@ -46,6 +46,9 @@ namespace ProgAssignment
             Transaction transaction = transactionResponse.Transaction;
 
             // Download all information for this transaction
+            Console.Write("TRANSACTION ID : ");
+            Console.WriteLine(transactionId);
+
             Console.WriteLine("==============================");
             Console.WriteLine("Outputs");
             Console.WriteLine("------------------------------");
@@ -60,7 +63,7 @@ namespace ProgAssignment
                 Console.Write("ScriptPubKey : ");
                 Console.WriteLine(paymentScript);  // It's the ScriptPubKey
                 var address = paymentScript.GetDestinationAddress(Network.Main);
-                Console.Write("ScriptPubKey : ");
+                Console.Write("Address : ");
                 Console.WriteLine(address);
                 Console.WriteLine("------------------------------");
             }
@@ -101,7 +104,7 @@ namespace ProgAssignment
             Decimal total_balance = 0;
 
             Console.WriteLine("==============================");
-            Console.WriteLine("All transactions");
+            Console.WriteLine("All transactions from wallet");
             Console.WriteLine("------------------------------");
             // print all transactions with their amount, and add theme to get balance
             foreach (BalanceOperation balance in operations)
@@ -134,7 +137,7 @@ namespace ProgAssignment
 
             // print transactions id and amount
             Console.WriteLine("==============================");
-            Console.WriteLine("Unspend transactions");
+            Console.WriteLine("Unspend transactions from wallet");
             Console.WriteLine("------------------------------");
             foreach (BalanceOperation balance in unspend_operations)
             {
