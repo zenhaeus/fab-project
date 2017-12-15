@@ -5,7 +5,7 @@ using NBitcoin;
 using QBitNinja.Client;
 using QBitNinja.Client.Models;
 
-namespace MyProject
+namespace ProgAssignment
 {
     class NinjaInteractor
     {
@@ -97,7 +97,7 @@ namespace MyProject
         private void Copay_info(QBitNinjaClient client, WalletClient wallet)
         {
             List<BalanceOperation> operations = wallet.GetBalance().Result.Operations;
-        
+
             Decimal total_balance = 0;
 
             Console.WriteLine("==============================");
